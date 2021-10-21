@@ -1,0 +1,91 @@
+@use '~@miraidesigns/base';
+@use '~@miraidesigns/fx';
+@use '~@miraidesigns/helpers';
+@use '~@miraidesigns/theme';
+@use '~@miraidesigns/typography';
+@use '~@miraidesigns/utils';
+
+.#{base.$prefix}-slide {
+    &__content--top {
+        justify-content: flex-start;
+        padding-top: utils.px2rem(24px);
+    }
+
+    &__controls {
+        position: relative;
+        right: -#{utils.px2rem(8px)};
+    }
+}
+
+#add-timer {
+    @include helpers.padding(32px 16px);
+    @include fx.animation-standard(background-color, 200ms);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-muted, #{theme.prop('background-muted')});
+    color: var(--primary, #{theme.prop('primary')});
+    font-size: utils.px2rem(14px);
+    font-weight: 500;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: utils.px2rem(4px);
+    outline: 0;
+
+    &:hover {
+        background-color: var(--background-hover, #{theme.prop('background-hover')});
+        cursor: pointer;
+    }
+
+    &:focus-visible {
+        background-color: var(--background-hover, #{theme.prop('background-hover')});
+    }
+
+    .#{base.$prefix}-icon {
+        @include helpers.margin(0 0 8px 0);
+
+        height: utils.px2rem(48px);
+        width: utils.px2rem(48px);
+    }
+}
+
+#timers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: utils.px2rem(16px);
+    grid-auto-flow: row;
+    grid-template-areas:
+        '. . .'
+        '. . .'
+        '. . .';
+    width: 100%;
+}
+
+// Default landing text message and button.
+#landing {
+    text-align: center;
+
+    &-heading {
+        @include typography.font-size-responsive(28px, 32px, 40px);
+
+        font-weight: 300;
+        text-align: center;
+
+        strong {
+            color: var(--brand, #{theme.brand()});
+        }
+    }
+
+    .#{base.$prefix}-button {
+        margin-top: utils.px2rem(64px);
+    }
+}
+
+// Small copyright text
+.#{base.$prefix}-copyright {
+    color: var(--secondary, #{theme.prop('secondary')});
+    font-size: utils.px2rem(13px);
+}

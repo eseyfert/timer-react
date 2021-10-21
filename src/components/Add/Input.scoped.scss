@@ -1,0 +1,44 @@
+@use '~@miraidesigns/base';
+@use '~@miraidesigns/fx';
+@use '~@miraidesigns/theme';
+@use '~@miraidesigns/typography';
+@use '~@miraidesigns/utils';
+
+.#{base.$prefix}-timer-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__number {
+        @include fx.animation-standard(border-color, 200ms);
+        @include typography.font-size-responsive(72px, 96px, 112px);
+
+        width: calc(2ch + #{utils.px2rem(16px)});
+        background-color: transparent;
+        color: var(--primary, #{theme.prop('primary')});
+        line-height: 1;
+        text-align: center;
+        border: 0;
+        border-bottom: utils.px2rem(2px) solid var(--border, #{theme.prop('border')});
+        appearance: textfield;
+
+        &:hover {
+            border-color: var(--border-hover, #{theme.prop('border-hover')});
+        }
+
+        &:focus {
+            border-color: var(--brand, #{theme.brand()});
+            outline: 0;
+            box-shadow: none;
+        }
+    }
+
+    &__label {
+        @include typography.font-size-responsive(16px, 18px, 20px);
+
+        margin-top: utils.px2rem(8px);
+        color: var(--secondary, #{theme.prop('secondary')});
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+}

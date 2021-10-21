@@ -1,0 +1,177 @@
+@forward '~@miraidesigns/base/styles';
+@forward '~@miraidesigns/typography/styles';
+@forward '~@miraidesigns/theme/styles';
+@forward '~@miraidesigns/layout/styles';
+@forward '~@miraidesigns/page/styles';
+@forward '~@miraidesigns/helpers/styles';
+@forward '~@miraidesigns/elements/styles';
+@forward '~@miraidesigns/button/styles';
+@forward '~@miraidesigns/list/styles';
+@forward '~@miraidesigns/textfield/styles';
+@forward '~@miraidesigns/switch/styles';
+@forward '~@miraidesigns/grid/styles';
+
+@use '~@miraidesigns/base';
+@use '~@miraidesigns/fx';
+@use '~@miraidesigns/helpers';
+@use '~@miraidesigns/theme';
+@use '~@miraidesigns/utils';
+
+.#{base.$prefix}-app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--background-hover, #{theme.prop('background-hover')});
+}
+
+.#{base.$prefix}-app-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    @include base.breakpoint('tablet-portrait') {
+        max-height: calc(100% - #{utils.px2rem(96px)});
+        max-width: calc(100% - #{utils.px2rem(96px)});
+    }
+
+    @include base.breakpoint('laptop') {
+        max-width: utils.px2rem(960px);
+    }
+}
+
+.#{base.$prefix}-slides {
+    @include fx.animation-standard(transform, 300ms);
+
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.#{base.$prefix}-slide {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background, #{theme.prop('background')});
+    overflow: hidden;
+
+    @include base.breakpoint('tablet-portrait') {
+        @include fx.elevation(1);
+
+        margin-right: utils.px2rem(8px);
+        border-radius: utils.px2rem(4px);
+    }
+
+    &__header {
+        @include helpers.padding(0 24px);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: utils.px2rem(72px);
+    }
+
+    &__title {
+        font-size: utils.px2rem(20px);
+        font-weight: 700;
+        line-height: 1;
+
+        strong {
+            color: var(--brand, #{theme.brand()});
+        }
+    }
+
+    &__main {
+        @include helpers.padding(0 8px);
+
+        flex: 1;
+        min-height: 0px;
+        width: auto;
+        overflow: hidden;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+
+    &__content {
+        @include helpers.padding(0 16px);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+        width: 100%;
+    }
+
+    &__footer {
+        @include helpers.padding(16px);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Buttons
+.#{base.$prefix}-button:not(.#{base.$prefix}-button--icon) {
+    border-radius: utils.px2rem(4px);
+}
+
+// Add box-shadow backdrop for focused buttons.
+.#{base.$prefix}-button--filled {
+    &:focus-visible {
+        box-shadow: 0 0 0 utils.px2rem(4px) var(--background-active, #{theme.prop('background-active')});
+    }
+}
+
+// Add indicator for outwards going links.
+a[target='_blank'] {
+    position: relative;
+
+    &:focus-visible {
+        &::after {
+            content: '\238b';
+            position: absolute;
+            top: -#{utils.px2rem(8px)};
+            right: -#{utils.px2rem(10px)};
+            font-size: utils.px2rem(14px);
+            transform: rotate(90deg);
+        }
+    }
+}
+
+$gradients: (
+    'JShine': linear-gradient(45deg, #12c2e9, #c471ed, #f64f59),
+    'MegaTron': linear-gradient(45deg, #c6ffdd, #fbd786, #f7797d),
+    'Yoda': linear-gradient(45deg, #ff0099, #493240),
+    'Amin': linear-gradient(45deg, #8e2de2, #4a00e0),
+    'WitchingHour': linear-gradient(45deg, #c31432, #240b36),
+    'Flare': linear-gradient(45deg, #f12711, #f5af19),
+    'KyooPal': linear-gradient(45deg, #dd3e54, #6be585),
+    'KyeMeh': linear-gradient(45deg, #8360c3, #2ebf91),
+    'ByDesign': linear-gradient(45deg, #009fff, #ec2f4b),
+    'BurningOrange': linear-gradient(45deg, #ff416c, #ff4b2b),
+    'Wiretap': linear-gradient(45deg, #8a2387, #e94057, #f27121),
+    'SummerDog': linear-gradient(45deg, #a8ff78, #78ffd6),
+    'SinCityRed': linear-gradient(45deg, #ed213a, #93291e),
+    'BlueRaspberry': linear-gradient(45deg, #00b4db, #0083b0),
+    'eXpresso': linear-gradient(45deg, #ad5389, #3c1053),
+    'Quepal': linear-gradient(45deg, #11998e, #38ef7d)
+);
+
+@each $name, $value in $gradients {
+    .#{base.$prefix}-gradient-#{$name} {
+        background: $value;
+    }
+}

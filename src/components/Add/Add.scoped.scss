@@ -1,0 +1,89 @@
+@use '~@miraidesigns/base';
+@use '~@miraidesigns/fx';
+@use '~@miraidesigns/helpers';
+@use '~@miraidesigns/theme';
+@use '~@miraidesigns/utils';
+
+.#{base.$prefix}-slide {
+    &__controls {
+        position: relative;
+        left: utils.px2rem(-16px);
+
+        .#{base.$prefix}-icon {
+            height: utils.px2rem(32px);
+            width: utils.px2rem(32px);
+        }
+    }
+
+    &__content {
+        .#{base.$prefix}-error {
+            @include helpers.margin(0 0 16px);
+            @include helpers.padding(0 16px);
+            @include fx.animation-standard(opacity, 200ms);
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            opacity: 0;
+            height: utils.px2rem(48px);
+            width: 100%;
+            background-color: theme.color('error');
+            border-radius: utils.px2rem(4px);
+            pointer-events: none;
+
+            &--active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .#{base.$prefix}-icon {
+                margin-right: utils.px2rem(8px);
+                fill: #fff;
+            }
+
+            &__message {
+                color: #fff;
+                line-height: 1.5;
+            }
+        }
+
+        #title-input {
+            @include helpers.margin(0 0 32px 0);
+            @include helpers.padding(16px);
+            @include fx.animation-standard(background-color, 200ms);
+
+            width: 100%;
+            background-color: var(--background-muted, #{theme.prop('background-muted')});
+            color: var(--primary, #{theme.prop('primary')});
+            font-size: utils.px2rem(20px);
+            border: 0;
+            border-bottom: utils.px2rem(2px) solid var(--border, #{theme.prop('border')});
+            border-radius: utils.px2rem(4px);
+
+            &:hover {
+                background-color: var(--background-hover, #{theme.prop('background-hover')});
+                border-color: var(--border-hover, #{theme.prop('border-hover')});
+            }
+
+            &:focus {
+                background-color: var(--background-hover, #{theme.prop('background-active')});
+                border-color: var(--brand, #{theme.brand()});
+                outline: 0;
+            }
+        }
+
+        .#{base.$prefix}-group {
+            width: 100%;
+            justify-content: space-evenly;
+        }
+    }
+
+    &__footer {
+        @include helpers.padding(24px);
+
+        .#{base.$prefix}-button--hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}
