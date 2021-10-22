@@ -18,13 +18,15 @@
 }
 
 #add-timer {
-    @include helpers.padding(32px 16px);
+    @include helpers.padding(26px 16px);
     @include fx.animation-standard(background-color, 200ms);
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: utils.px2rem(160px);
+    max-width: utils.px2rem(320px);
     background-color: var(--background-muted, #{theme.prop('background-muted')});
     color: var(--primary, #{theme.prop('primary')});
     font-size: utils.px2rem(14px);
