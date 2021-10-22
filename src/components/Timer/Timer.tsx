@@ -281,7 +281,7 @@ export default class Timer extends React.Component<TimerProps, TimerState> {
         return (
             <div className={`mdf-timer ${!paused && !stopped ? 'mdf-timer--active' : ''}`}>
                 <div className="mdf-timer__header">
-                    {title ? title : 'Untitled'}
+                    <span className="mdf-timer__title">{title ? title : 'Untitled'}</span>
 
                     <button
                         className="mdf-button mdf-button--icon"
